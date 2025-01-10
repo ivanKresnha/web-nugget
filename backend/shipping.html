@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="../script/style.css">
+</head>
+<body>
+    <div class="shipping-container">
+        <h2>Shipping Management</h2>
+        
+        <div class="shipping-list">
+            <!-- Sample Order Item -->
+            <div class="order-item">
+                <div class="order-header">
+                    <h3>Order #12345</h3>
+                    <span class="order-date">10 Jan 2025</span>
+                </div>
+                
+                <div class="order-details">
+                    <div class="customer-info">
+                        <p><strong>Customer:</strong> John Doe</p>
+                        <p><strong>Address:</strong> Jl. Contoh No. 123, Jakarta</p>
+                    </div>
+                    
+                    <div class="shipping-status">
+                        <label>Status Pesanan:</label>
+                        <select class="status-select">
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                        </select>
+                    </div>
+
+                    <div class="invoice-section">
+                        <h4>Invoice Details</h4>
+                        <div class="invoice-details">
+                            <p><strong>Invoice Number:</strong> INV/2025/12345</p>
+                            <p><strong>Total Amount:</strong> Rp 250.000</p>
+                            <button class="view-invoice-btn">View Invoice</button>
+                        </div>
+                    </div>
+
+                    <div class="shipping-actions">
+                        <button class="confirm-shipping-btn">Konfirmasi Pengiriman ke Kurir</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sample Order Item -->
+        </div>
+    </div>
+</body>
+</html>
