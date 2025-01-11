@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Rida Frozen</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">Rida Frozen</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#products">Produk</a></li>
+                <li><a href="#">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-container">
+            <h2>Profil Pengguna</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="profile">Data Diri</button>
+                <button class="tab-btn" data-tab="transactions">Riwayat Transaksi</button>
+            </div>
+
+            <!-- Profile Tab Content -->
+            <div class="tab-content active" id="profile">
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Alamat</label>
+                        <textarea id="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">No. HP</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="ktp">Foto KTP</label>
+                        <div class="ktp-upload">
+                            <input type="file" id="ktp" accept="image/jpeg,image/png,image/jpg" required>
+                            <div class="ktp-preview">
+                                <img id="ktpPreview" src="#" alt="Preview KTP" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="save-button">Simpan Perubahan</button>
+                </form>
+            </div>
+
+            <!-- Transactions Tab Content -->
+            <div class="tab-content" id="transactions">
+                <div class="transaction-list">
+                    <!-- Sample transaction -->
+                    <div class="transaction-item">
+                        <div class="transaction-header">
+                            <span class="order-id">Order #12345</span>
+                            <span class="order-date">11 Jan 2025</span>
+                            <span class="order-status">Selesai</span>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="product-list">
+                                <div class="product-item">
+                                    <img src="path/to/product-image.jpg" alt="Product">
+                                    <div class="product-info">
+                                        <h4>Nugget Ayam</h4>
+                                        <p>2 x Rp 25.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="transaction-total">
+                                <p>Total: Rp 50.000</p>
+                                <button class="view-receipt">Lihat Struk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

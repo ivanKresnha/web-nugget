@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan - Admin Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="active">
+                    <a href="tablaporan.html"><i class="fas fa-chart-bar"></i> Laporan</a>
+                </li>
+                <li>
+                    <a href="adminproduk.html"><i class="fas fa-box"></i> Produk</a>
+                </li>
+                <li>
+                    <a href="#orders"><i class="fas fa-shopping-cart"></i> Order</a>
+                </li>
+                <li>
+                    <a href="#transactions"><i class="fas fa-money-bill-wave"></i> Transaksi</a>
+                </li>
+                <li class="logout">
+                    <a href="/index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Laporan Keuangan</h1>
+                <div class="admin-info">
+                    <span>Admin</span>
+                    <img src="default-avatar.png" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <!-- Financial Overview Cards -->
+            <div class="financial-cards">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-tags"></i></div>
+                    <div class="card-info">
+                        <h3>Total Modal</h3>
+                        <p>Rp 15.000.000</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="card-info">
+                        <h3>Total Penjualan</h3>
+                        <p>Rp 25.000.000</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="card-info">
+                        <h3>Profit Bulanan</h3>
+                        <p>Rp 10.000.000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Chart -->
+            <div class="chart-container">
+                <h2>Grafik Penjualan Mingguan</h2>
+                <canvas id="salesChart"></canvas>
+            </div>
+
+            <!-- Detailed Financial Table -->
+            <div class="financial-table">
+                <h2>Detail Laporan Keuangan</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Produk</th>
+                            <th>Modal</th>
+                            <th>Harga Jual</th>
+                            <th>Profit</th>
+                            <th>Terjual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Kentang Goreng Premium</td>
+                            <td>Rp 400.000</td>
+                            <td>Rp 500.000</td>
+                            <td>Rp 100.000</td>
+                            <td>15</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sales Chart Configuration
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+                datasets: [{
+                    label: 'Penjualan Mingguan',
+                    data: [5000000, 6200000, 7400000, 8100000],
+                    borderColor: '#e74c3c',
+                    tension: 0.3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Trend Penjualan Bulan Ini'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp ' + value.toLocaleString('id-ID');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="../auth.js"></script>
+</body>
+</html>

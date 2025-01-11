@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Rida Frozen</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="tablaporan.html"><i class="fas fa-chart-bar"></i> Laporan</a>
+                </li>
+                <li>
+                    <a href="adminproduk.html"><i class="fas fa-box"></i> Produk</a>
+                </li>
+                <li>
+                    <a href="order.html"><i class="fas fa-shopping-cart"></i> Order</a>
+                </li>
+                <li>
+                    <a href="#transactions"><i class="fas fa-money-bill-wave"></i> Transaksi</a>
+                </li>
+                <li class="logout">
+                    <a href="/index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+                <div class="admin-info">
+                    <span>Admin</span>
+                    <img src="default-avatar.png" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <!-- Dashboard Overview -->
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="card-info">
+                        <h3>Total Produk</h3>
+                        <p>24</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="card-info">
+                        <h3>Order Baru</h3>
+                        <p>12</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="card-info">
+                        <h3>Pendapatan</h3>
+                        <p>Rp 5.000.000</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Payment Proof Modal -->
+            <div id="paymentModal" class="modal">
+                <span class="modal-close">&times;</span>
+                <div class="modal-content">
+                    <h3>Bukti Pembayaran</h3>
+                    <img id="modalPaymentImage" src="/alvito bukti.jpeg" class="payment-image-full" alt="Bukti Pembayaran">
+                </div>
+            </div>
+            
+
+            <!-- Recent Orders -->
+            <div class="recent-section">
+                <h2>Order Terbaru</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Pelanggan</th>
+                            <th>Produk</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data -->
+                        <tr>
+                            <td>#ORD001</td>
+                            <td>John Doe</td>
+                            <td>Nugget Ayam (2x)</td>
+                            <td>Rp 50.000</td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td>
+                                <button class="btn-action view" onclick="viewPaymentProof('${orderId}')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action delete" onclick="cancelOrder('${orderId}')" title="Batalkan Pesanan">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                            <tr data-order-id="${orderId}">
+                                <!-- ... other cells ... -->
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-content">
+            <h3>Konfirmasi Pembatalan</h3>
+            <p>Apakah Anda yakin ingin membatalkan pesanan ini?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn no" onclick="closeConfirmModal()">Tidak</button>
+                <button class="confirm-btn yes" onclick="confirmCancel()">Ya, Batalkan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

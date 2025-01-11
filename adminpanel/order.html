@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="tablaporan.html"><i class="fas fa-chart-bar"></i> Laporan</a>
+                </li>
+                <li>
+                    <a href="adminproduk.html"><i class="fas fa-box"></i> Produk</a>
+                </li>
+                <li class="active">
+                    <a href="order.html"><i class="fas fa-shopping-cart"></i> Order</a>
+                </li>
+                <li>
+                    <a href="#transactions"><i class="fas fa-money-bill-wave"></i> Transaksi</a>
+                </li>
+                <li class="logout">
+                    <a href="/index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Manajemen Pesanan</h1>
+                <div class="admin-info">
+                    <span>Admin</span>
+                    <img src="default-avatar.png" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <!-- Order Filters -->
+            <div class="order-filters">
+                <select id="statusFilter" onchange="filterOrders()">
+                    <option value="all">Semua Status</option>
+                    <option value="pending">Menunggu Konfirmasi</option>
+                    <option value="processing">Diproses</option>
+                    <option value="shipped">Dikirim</option>
+                    <option value="completed">Selesai</option>
+                </select>
+                <input type="text" id="orderSearch" placeholder="Cari Order ID..." onkeyup="searchOrders()">
+            </div>
+
+            <!-- Orders Table -->
+            <div class="orders-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Tanggal</th>
+                            <th>Pelanggan</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Bukti</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Sample Order Row -->
+                        <tr>
+                            <td>#ORD001</td>
+                            <td>11 Jan 2025</td>
+                            <td>John Doe</td>
+                            <td>Rp 250.000</td>
+                            <td>
+                                <span class="status-badge pending">Menunggu Konfirmasi</span>
+                            </td>
+                            <td>
+                                <button class="btn-invoice" onclick="viewInvoice('ORD001')">
+                                    <i class="fas fa-file-invoice"></i> Lihat
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn-complete" onclick="completeOrder('ORD001')">
+                                    <i class="fas fa-check"></i> Selesai
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Invoice Modal -->
+            <div id="invoiceModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeInvoiceModal()">&times;</span>
+                    <h2>Detail pembayaran</h2>
+                    <div class="invoice-content">
+                        <div class="invoice-header">
+                            <h3>Invoice #<span id="invoiceNumber">ORD001</span></h3>
+                            <p>Tanggal: <span id="invoiceDate">11 Jan 2025</span></p>
+                        </div>
+                        <div class="customer-details">
+                            <h4>Detail Pelanggan</h4>
+                            <p>Nama: <span id="customerName">John Doe</span></p>
+                            <p>Email: <span id="customerEmail">john@example.com</span></p>
+                            <p>Alamat: <span id="customerAddress">Jl. Contoh No. 123</span></p>
+                            <p>Bukti Pembayaran:</p>
+                            <div class="payment-proof">
+                                <img id="customerPayment" src="" alt="Bukti Pembayaran" class="payment-image">
+                                <!-- Add view full size button -->
+                                <button onclick="viewFullImage()" class="view-full-btn">Lihat Ukuran Penuh</button>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <h4>Item Pesanan</h4>
+                            <table class="invoice-items-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoiceItems">
+                                    <!-- Items will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="invoice-total">
+                            <p>Subtotal: <span id="subtotal">Rp 230.000</span></p>
+                            <p>Jarak Pengiriman: <span id="deliveryDistance">3.5 km</span></p>
+                            <p>Ongkir: <span id="shipping">Rp 6.000</span></p>
+                            <h4>Total: <span id="total">Rp 236.000</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../auth.js"></script>
+    <script>
+        // View Invoice
+        function viewInvoice(orderId) {
+            document.getElementById('invoiceModal').style.display = 'block';
+            // Load invoice details here
+        }
+
+
+        // Close Invoice Modal
+        function closeInvoiceModal() {
+            document.getElementById('invoiceModal').style.display = 'none';
+        }
+
+        // Complete Order
+        function completeOrder(orderId) {
+            if (confirm('Apakah Anda yakin pesanan ini sudah selesai dan siap dikirim?')) {
+                // Update order status to completed
+                // You would typically make an API call here
+                alert('Pesanan berhasil dikonfirmasi dan siap dikirim!');
+                // Update UI to reflect the change
+                updateOrderStatus(orderId, 'completed');
+            }
+        }
+
+        // Filter Orders
+        function filterOrders() {
+            const status = document.getElementById('statusFilter').value;
+            // Implement filtering logic here
+        }
+
+        // Search Orders
+        function searchOrders() {
+            const searchTerm = document.getElementById('orderSearch').value;
+            // Implement search logic here
+        }
+
+        // Update Order Status
+        function updateOrderStatus(orderId, status) {
+            // Implement status update logic here
+        }
+    </script>
+    <script src="shipping.js"></script>
+</body>
+</html>
